@@ -1,0 +1,7 @@
+micronaut:
+  application:
+    name: mnGradleConfigSample
+netty:
+  default:
+    allocator:
+      max-order: 3
