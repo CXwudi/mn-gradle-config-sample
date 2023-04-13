@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    micronautBoms(platform("io.micronaut:micronaut-bom:3.8.9"))
+    micronautBoms(platform("io.micronaut:micronaut-bom:3.8.9")) // this line should work even if gradle.properties is not present
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
