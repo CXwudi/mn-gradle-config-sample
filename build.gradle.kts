@@ -12,9 +12,14 @@ group = "com.example"
 repositories {
     mavenCentral()
 }
-
+configurations {
+    // for some reason, kapt is not extended from micronautBoms..., so manually adding it
+    kapt.get().extendsFrom(micronautBoms.get())
+}
 dependencies {
-    micronautBoms(platform("io.micronaut:micronaut-bom:3.8.9")) // this line should work even if gradle.properties is not present
+    // defining the version through micronautBoms(platform())
+    // note that "io.micronaut:micronaut-bom:3.8.9" can come from user's own gradle platform, or convention plugin.
+    micronautBoms(platform("io.micronaut:micronaut-bom:3.8.9"))
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
@@ -46,6 +51,8 @@ kotlin {
 
 graalvmNative.toolchainDetection.set(false)
 micronaut {
+    // uncomment this version.set() to see error pops up, even though a version is defined in micronautBoms
+    version.set("1.0.0") // dummy version smaller than the one define in micronautBoms configuration just to satisfy the plugin
     runtime("netty")
     testRuntime("kotest")
     processing {
